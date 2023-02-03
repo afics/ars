@@ -1,0 +1,26 @@
+# Automated Resource Scheduling (ARS)
+
+This tool distributes compute resources (VMs, containers, or anything else)
+according to available hardware resources, load and configured constraints. It
+populates a model which is subsequently solved using a SAT solver from OR-tools
+[0]. Run it by executing main.py in a loop every few minutes. It looks for its
+configuration in a file named ars.cfg in the current working directory.
+
+With regards to resource usage both CPU and memory utilization are considered.
+Supported constraints are:
+  - VM-to-VM (Resource-to-Resource)
+  - VM-to-Host (Resource-to-Compute-Node)
+Both support affinity (keep-together, run-on) and anti-affinity (keep-apart,
+run-elsewhere). Example configurations show casing this can be found in the
+examples/ directory.
+
+**WARNING**: This tool is highly EXPERIMENTAL. Altough it is used daily by its
+creator, it is not recommended to use it in production environments. It is
+missing documentation, logging and tests.
+
+Currently supported is Proxmox VE, but the tool is supposed to be easily
+extendable to other systems.
+
+This project is licensed under the GPLv3 LICENSE.
+
+[0] https://github.com/google/or-tools
